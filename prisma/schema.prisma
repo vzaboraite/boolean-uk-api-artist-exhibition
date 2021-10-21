@@ -16,3 +16,19 @@ model Artist {
   firstName String @db.VarChar(255)
   lastName  String @db.VarChar(255)
 }
+
+model Exhibition {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  date      DateTime @default(now())
+  addressId Int
+  address   Address  @relation(fields: [addressId], references: [id])
+}
+
+model Address {
+  id          Int          @id @default(autoincrement())
+  street      String       @db.VarChar(255)
+  city        String       @db.VarChar(255)
+  postCode    String       @db.VarChar(8)
+  exhibitions Exhibition[]
+}
