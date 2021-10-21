@@ -5,6 +5,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const artistsRouter = require("./resources/artist/router");
+const exhibitionsRouter = require("./resources/exhibition/router");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(morgan("dev"));
 /* SETUP ROUTES */
 
 app.use("/artists", artistsRouter);
+app.use("/exhibitions", exhibitionsRouter);
 
 app.get("*", (req, res) => {
   res.json({ ok: true });
