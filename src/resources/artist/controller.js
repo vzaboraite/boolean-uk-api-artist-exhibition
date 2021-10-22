@@ -1,13 +1,20 @@
 const prisma = require("../../utils/database");
 
 const createArtist = async (req, res) => {
-  const { firstName, lastName } = req.body;
+  const { firstName, lastName, exhibitionId } = req.body;
 
   try {
     const createdArtist = await prisma.artist.create({
       data: {
         firstName,
         lastName,
+      },
+    });
+
+    await prisma.exhibitionsOnArtists.create({
+      data: {
+        exhibitionId: parseInt(exhibitionId),
+        artistId: parseInt(createdArtist.id),
       },
     });
 
