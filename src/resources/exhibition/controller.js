@@ -30,4 +30,16 @@ const createExhibitionWithAddress = async (req, res) => {
   }
 };
 
-module.exports = { createExhibitionWithAddress };
+const getAllExhibitions = async (req, res) => {
+  try {
+    const allExhibitions = await prisma.exhibition.findMany();
+
+    res.json({ data: allExhibitions });
+  } catch (error) {
+    console.error({ error: error.message });
+
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { createExhibitionWithAddress, getAllExhibitions };
